@@ -1,0 +1,95 @@
+registry:
+- key: 'HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
+- key: 'HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
+- key: 'HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders'
+  values:
+  - Startup
+- key: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
+- key: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
+- key: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run'
+- key: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\RunOnce'
+- key: 'HKEY_USERS\*\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\Install\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
+- key: 'HKEY_USERS\*\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\Install\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
+- key: 'HKEY_USERS\*\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows'
+  values:
+  - 'Load'
+  - 'Run'
+  - 'IconServiceLib'
+- key: 'HKEY_USERS\*\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
+  values:
+  - 'Shell'
+  - 'AppSetup'
+  - 'Taskman'
+  - 'Userinit'
+  - 'VmApplet'
+- key: 'HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run'
+- key: 'HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+  values:
+  - 'Shell'
+- key: 'HKEY_USERS\*\SOFTWARE\Policies\Microsoft\Windows\System\Scripts\*\*\*'
+  values:
+  - 'Script'
+- key: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\Install\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
+- key: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Terminal Server\Install\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
+- key: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\Install\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
+- key: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Terminal Server\Install\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
+- key: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows'
+  values:
+  - 'Load'
+  - 'Run'
+  - 'IconServiceLib'
+- key: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Windows'
+  values:
+  - 'Load'
+  - 'Run'
+  - 'IconServiceLib'
+- key: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
+  values:
+  - 'Shell'
+  - 'AppSetup'
+  - 'Taskman'
+  - 'Userinit'
+  - 'VmApplet'
+- key: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Winlogon'
+  values:
+  - 'Shell'
+  - 'AppSetup'
+  - 'Taskman'
+  - 'Userinit'
+  - 'VmApplet'
+- key: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run'
+- key: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run'
+- key: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+  values:
+  - 'Shell'
+- key: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Policies\System'
+  values:
+  - 'Shell'
+- key: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\System\Scripts\*\*\*'
+  values:
+  - 'Script'
+- key: 'HKLM\SOFTWARE\WOW6432Node\Policies\Microsoft\Windows\System\Scripts\*\*\*'
+  values:
+  - 'Script'
+- key: 'HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components'
+  values:
+  - 'StubPath'
+- key: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Active Setup\Installed Components\*'
+  values:
+  - 'StubPath'
+- key: 'HKEY_USERS\*\System\*ControlSet*\Control\SafeBoot'
+  values:
+  - 'AlternateShell'
+- key: 'HKLM\System\ControlSet*\Control\SafeBoot'
+  values:
+  - 'AlternateShell'
+- key: 'HKLM\System\ControlSet*\Control\Session Manager'
+  values:
+  - 'BootExecute'
+  - 'SetupExecute'
+  - 'Execute'
+  - 'S0InitialCommand'
+- key: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*'
+  values:
+  - 'debugger'
+

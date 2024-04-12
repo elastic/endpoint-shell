@@ -1,6 +1,7 @@
 import shlex
 import argparse
 import datetime
+import getpass
 
 from prettytable import PrettyTable
 
@@ -29,7 +30,7 @@ def main():
     args = parser.parse_args()
     
     if not args.password:
-        args.password = input("Enter password: ")
+        args.password = getpass.getpass("Enter password: ")
     
     session = endpoint_api.Session(args.kibana_url)
     session.login(args.user, args.password)

@@ -29,7 +29,7 @@ def generate_registry_esql(agent_id, user_name):
     # strip trailing or
     query = query.rstrip("or \n")
     query += '| keep registry.hive, registry.key, registry.value, registry.path, registry.data.strings'
-    print(query)
+    #print(query)
     
     return query
 
@@ -43,7 +43,7 @@ def generate_file_esql(agent_id, user_name):
 
 def generate_process_esql(agent_id, user_name):
     query = f'from logs-*| where event.category == "process" and event.action == "start" and agent.id == "{agent_id}" and user.name == "{user_name}"'
-    query += '| where not (process.code_signature.trusted == true and process.code_signature.subject_name like "*Microsoft*")' # todo or lolbin
+    query += '| where not (process.code_signature.trusted == true and process.code_signature.subject_name like "*Microsoft*" and not (process.name == "powershell.exe" or process.name == "wscript.exe"))'
     query += '| keep process.executable, process.entity_id, process.pid'
     #print(query)
     
@@ -98,6 +98,10 @@ def remediate_alert(session, alert_id):
             files_to_collect.append(file_path)
             cmd = f'Remove-Item -Path "{file_path}" -Force'
             file_cleanup_commands.append(cmd)
+
+    if not (process_terminate_commands or files_to_collect or file_cleanup_commands or registry_cleanup_commands):
+        print("No cleanup necessary")
+        return
 
     r = input("Execute remediation [y/n]: ")
     if r != "y":

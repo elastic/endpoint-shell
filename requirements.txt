@@ -1,0 +1,15 @@
+certifi==2024.2.2
+charset-normalizer==3.3.2
+gitdb==4.0.11
+GitPython==3.1.41
+idna==3.7
+prettytable==3.10.0
+pycryptodomex==3.20.0
+PyYAML==6.0.1
+pyzipper==0.3.6
+requests==2.31.0
+setuptools==69.0.3
+smmap==5.0.1
+urllib3==2.2.1
+wcwidth==0.2.13
+wheel==0.43.0

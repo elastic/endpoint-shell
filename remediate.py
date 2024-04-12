@@ -74,7 +74,7 @@ def remediate_alert(session, alert_id):
             process_terminate_commands.append(cmd)
 
     # todo task/service cleanup
-
+    
     registry_cleanup_commands = []
     reg_query = generate_registry_esql(agent_id, user_name)
     rows = session.esql_query(reg_query, start_date, end_date)

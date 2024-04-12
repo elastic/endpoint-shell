@@ -1,2 +1,2 @@
-# endpoint_shell
+# Endpoint Shell
 Endpoint Response Shell

@@ -48,8 +48,13 @@ class Session:
         session = requests.session()
         session.hooks['response'] = response_hook
         session.headers.update({"kbn-xsrf": str(uuid.uuid4())})
+        if "cloud.es.io" in self.kibana_url:
+            provider = 'cloud-basic'
+        else:
+            # todo test self-hosted elastic
+            provider = 'basic'
         payload = {"username": user, "password": password}
-        payload = {'params': payload, 'currentURL': '', 'providerType': 'basic', 'providerName': 'cloud-basic'}
+        payload = {'params': payload, 'currentURL': '', 'providerType': 'basic', 'providerName': provider}
         session.post(self.url("/internal/security/login"), json=payload)
         self.session = session
 

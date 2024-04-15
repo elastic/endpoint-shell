@@ -4,6 +4,7 @@ import time
 import datetime
 import io
 
+import urllib3
 import requests
 import pyzipper
 
@@ -36,8 +37,9 @@ class Session:
         kibana_url = kibana_url.rstrip("/")
         self.kibana_url = kibana_url
     def url(self, uri):
-        return self.kibana_url + "/" + uri.lstrip("/")     
-    def login(self, user, password):
+        return self.kibana_url + "/" + uri.lstrip("/")
+        
+    def login(self, user, password, cloud, no_verify):
         # login to kibana with the provided creds
         def response_hook(r, *args, **kwargs):
             try:
@@ -45,17 +47,22 @@ class Session:
             except Exception:
                 print(r.json())
                 raise
+                
         session = requests.session()
         session.hooks['response'] = response_hook
         session.headers.update({"kbn-xsrf": str(uuid.uuid4())})
-        if "cloud.es.io" in self.kibana_url:
-            provider = 'cloud-basic'
+        
+        if cloud:
+            payload = {"username": user, "password": password}
+            payload = {'params': payload, 'currentURL': '', 'providerType': 'basic', 'providerName': 'cloud-basic'}
+            session.post(self.url("/internal/security/login"), json=payload)
         else:
-            # todo test self-hosted elastic
-            provider = 'basic'
-        payload = {"username": user, "password": password}
-        payload = {'params': payload, 'currentURL': '', 'providerType': 'basic', 'providerName': provider}
-        session.post(self.url("/internal/security/login"), json=payload)
+            session.auth = (user, password)
+
+        if no_verify:
+            session.verify = False
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
         self.session = session
 
     def get_hosts(self):
@@ -201,3 +208,7 @@ class Session:
         }
         response = self.session.post(self.url("/api/console/proxy?path=/_query/&method=POST"), json=body).json()
         return response.get("values", [])
+
+    def search(self, index, body):
+        response = self.session.post(self.url(f"/api/console/proxy?path=/{index}/_search?&method=POST"), json=body).json()
+        return response

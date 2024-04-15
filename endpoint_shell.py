@@ -7,6 +7,7 @@ from prettytable import PrettyTable
 
 import endpoint_api
 import remediate
+import process_tree
 
 def shell(session, active_host):
     agent_id, hostname, os_full = active_host
@@ -25,15 +26,17 @@ def shell(session, active_host):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--kibana-url', help='Kibana URL', required=True)
-    parser.add_argument('--user', dest='user', help='Kibana username', default="elastic")
-    parser.add_argument('--password', dest='password', help='Kibana password')
+    parser.add_argument('--user', help='Kibana username', default="elastic")
+    parser.add_argument('--password', help='Kibana password')
+    parser.add_argument('--cloud', help='Login using Elastic Cloud account', action="store_true", default=False)
+    parser.add_argument('--no-verify', help='Don\'t validate TLS certificate', action="store_true", default=False)
     args = parser.parse_args()
     
     if not args.password:
         args.password = getpass.getpass("Enter password: ")
     
     session = endpoint_api.Session(args.kibana_url)
-    session.login(args.user, args.password)
+    session.login(args.user, args.password, args.cloud, args.no_verify)
     
     active_host = None
     while True:
@@ -101,7 +104,7 @@ def main():
             session.upload_file_wait(active_host[0], args[2], content)
         
         elif cmd.startswith("!alerts"):
-            start_date = datetime.datetime.utcnow()+datetime.timedelta(hours=24*-1)
+            start_date = datetime.datetime.utcnow()+datetime.timedelta(hours=24*-7)
             rows = session.esql_query('from logs-*| where event.kind == "alert" and event.module == "endpoint"|keep process.executable, message, event.id', start_date)
             if not rows:
                 print("No alerts found")
@@ -118,6 +121,15 @@ def main():
                 print("Usage: !remediate <alert id>")
                 continue
             remediate.remediate_alert(session, args[1])
+
+        elif cmd.startswith("!tree"):
+            args = cmd.split(" ")
+            if len(args) != 2:
+                print("Usage: !tree <alert id>")
+                continue
+            tree = process_tree.tree_from_alert(session, args[1])
+            print(tree)
+
         elif cmd in ("!exit", "exit", "!quit", "quit"):
             break
 

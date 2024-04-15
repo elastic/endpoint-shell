@@ -50,7 +50,7 @@ def generate_process_esql(agent_id, user_name):
     return query
     
 def remediate_alert(session, alert_id):
-    start_date = datetime.datetime.utcnow()+datetime.timedelta(hours=24*-1)
+    start_date = datetime.datetime.utcnow()+datetime.timedelta(hours=24*-30)
     rows = session.esql_query(f'from logs-*| where event.kind == "alert" and event.module == "endpoint" and event.id == "{alert_id}"|keep @timestamp, agent.id, user.name', start_date)
     if not rows:
         print("Alert not found")

@@ -78,3 +78,34 @@ Remediation complete!
 [endpoint shell] >
 ```
 
+# Process Tree
+Given an alert id, endpoint shell can generare a text process tree summary.
+
+```console
+[endpoint shell] > !tree NVQfH1BWpJAjia0k++++0/SG
+* C:\Windows\System32\wininit.exe:
+   * C:\Windows\System32\services.exe:
+      * C:\Windows\System32\svchost.exe: C:\Windows\system32\svchost.exe -k netsvcs -p -s Schedule
+         * C:\Windows\explorer.exe: C:\Windows\explorer.exe /NOUACCHECK
+            * C:\Users\user\Desktop\sample\Talking_Points_for_China\Talking_Points_for_China.exe: "C:\Users\user\Desktop\sample\Talking_Points_for_China\Talking_Points_for_China.exe"
+               library - load: C:\Users\user\Desktop\sample\Talking_Points_for_China\KeyScramblerIE.DLL
+               api - VirtualProtect( keyscramblerie.dll, 0x15c, RWX, R-- ), ntdll.dll|wow64.dll|wow64cpu.dll|wow64.dll|ntdll.dll|apphelp.dll|ntdll.dll
+               api - VirtualProtect( keyscramblerie.dll, 0x1000, R--, RWX ), ntdll.dll|wow64.dll|wow64cpu.dll|wow64.dll|ntdll.dll|apphelp.dll|ntdll.dll
+               api - VirtualProtect( ole32.dll, 0xc08, RWX, R-- ), ntdll.dll|wow64.dll|wow64cpu.dll|wow64.dll|ntdll.dll|apphelp.dll|ntdll.dll
+               api - VirtualProtect( ole32.dll, 0x1000, R--, RWX ), ntdll.dll|wow64.dll|wow64cpu.dll|wow64.dll|ntdll.dll|apphelp.dll|ntdll.dll
+               api - VirtualProtect( talking_points_for_china.exe, 0x2e4, RWX, R-- ), ntdll.dll|wow64.dll|wow64cpu.dll|wow64.dll|ntdll.dll|apphelp.dll|ntdll.dll
+               api - VirtualProtect( talking_points_for_china.exe, 0x1000, R--, RWX ), ntdll.dll|wow64.dll|wow64cpu.dll|wow64.dll|ntdll.dll|apphelp.dll|ntdll.dll
+               api - VirtualProtect( user32.dll, 0x24, RW-, R-X ), ntdll.dll|wow64.dll|wow64cpu.dll|wow64.dll|ntdll.dll|user32.dll|ntdll.dll
+               api - VirtualProtect( user32.dll, 0x1000, R-X, RW- ), ntdll.dll|wow64.dll|wow64cpu.dll|wow64.dll|ntdll.dll|user32.dll|ntdll.dll
+               file - creation: C:\Users\Public\Libraries\SmileTV\KeyScrambler.exe
+               registry - modification: HKEY_USERS\S-1-5-21-1938409289-1938409289-1938409289-1001\Software\Microsoft\Windows\CurrentVersion\Run\KeyScrambler -> ['C:\\Users\\Public\\Libraries\\SmileTV\\KeyScrambler.exe']
+               file - modification: C:\Users\Public\Libraries\SmileTV\KeyScrambler.exe [b'MZ\x90\x00\x03\x00\x00\x00\x04\x00\x00\x00\xff\xff\x00\x00']
+               file - creation: C:\Users\Public\Libraries\SmileTV\KeyScramblerIE.DLL [b'MZ\x90\x00\x03\x00\x00\x00\x04\x00\x00\x00\xff\xff\x00\x00']
+               Behavior Detection Alert - behavior - Suspicious String Value Written to Registry Run Key
+               api - VirtualAlloc( NULL, 0x1a8d, COMMIT|RESERVE, RWX ), ntdll.dll|wow64.dll|wow64cpu.dll|wow64.dll|ntdll.dll|kernelbase.dll|keyscramblerie.dll|Unknown|kernel32.dll|ntdll.dll
+               api - connect( ipv4, tcp, 103.27.109.157, 443 ), wow64cpu.dll|wow64.dll|ntdll.dll|mswsock.dll|ws2_32.dll|Unbacked|comdlg32.dll|user32.dll|comdlg32.dll|keyscramblerie.dll|Unknown|kernel32.dll|ntdll.dll
+               network - connection_attempted: 103.27.109.157:443
+               api - VirtualProtect( Unbacked, 0x2a05, RWX, RW- ), ntdll.dll|wow64.dll|wow64cpu.dll|wow64.dll|ntdll.dll|kernelbase.dll|Unbacked|comdlg32.dll|user32.dll|comdlg32.dll|keyscramblerie.dll|Unknown|kernel32.dll|ntdll.dll
+               Behavior Detection Alert - behavior - VirtualProtect API Call from an Unsigned DLL
+               Behavior Detection Alert - behavior - Shellcode Execution from Low Reputation Module
+```

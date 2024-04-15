@@ -20,6 +20,7 @@ Available commands:
 !upload <local path> <file name>  Upload a file to a host
 !alerts                           Display recent endpoint alerts
 !remediate <alert id>             Malware remediaton for an alert
+!tree <alert id>                  Display process tree surrounding alert
 [endpoint shell] > !list
 Active hosts: 1
   desktop-mpqrk7t - Windows 10 Pro 1909 (10.0.18363.418) - dab8c81e-1234-1234-1234-4ba1b0387db5

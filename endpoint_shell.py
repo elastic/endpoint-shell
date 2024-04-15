@@ -47,7 +47,7 @@ def main():
         cmd = input(f"[{prompt}] > ")
         
         if cmd.startswith("!help"):
-            print(" = Endpoint Response Shell =")
+            print(" = Endpoint Shell =")
             print("Available commands:")
             print("!list                             List active endpoints")
             print("!interact <host name>             Interact with a host")
@@ -56,6 +56,7 @@ def main():
             print("!upload <local path> <file name>  Upload a file to a host")
             print("!alerts                           Display recent endpoint alerts")
             print("!remediate <alert id>             Malware remediaton for an alert")
+            print("!tree <alert id>                  Display process tree surrounding alert")
             
         elif cmd.startswith("!list"):
             session.display_hosts()

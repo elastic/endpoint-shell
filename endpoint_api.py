@@ -45,12 +45,15 @@ class Session:
             try:
                 r.raise_for_status()
             except Exception:
-                print(r.json())
+                if r.content and r.content.startswith(b"{"):
+                    print(r.json())
+                else:
+                    print(r)
                 raise
                 
         session = requests.session()
         session.hooks['response'] = response_hook
-        session.headers.update({"kbn-xsrf": str(uuid.uuid4())})
+        session.headers.update({'Content-Type': "application/json", "kbn-xsrf": str(uuid.uuid4())})
         
         if cloud:
             payload = {"username": user, "password": password}

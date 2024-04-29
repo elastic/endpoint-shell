@@ -8,6 +8,18 @@ $ pip install -r requirements.txt
 
 # Usage
 ```console
+$ endpoint_shell.py --help
+usage: endpoint_shell.py [-h] --kibana-url KIBANA_URL [--user USER] [--password PASSWORD] [--cloud] [--no-verify]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --kibana-url KIBANA_URL
+                        Kibana URL
+  --user USER           Kibana username
+  --password PASSWORD   Kibana password
+  --cloud               Login using Elastic Cloud account
+  --no-verify           Don't validate TLS certificate
+
 $ endpoint_shell.py --kibana https://<kibana-url> --user elastic
 Enter password:
 [endpoint shell] > !help
